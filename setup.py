@@ -47,13 +47,10 @@ if platform.system() in ["Darwin", "FreeBSD", "OpenBSD"]:
     library_dirs = ["/usr/local/lib"]
 
 extra_compile_args = ["-Wall"]
-extra_link_args = []
 
-# On macOS, some distributions of python build extensions for 10.6 by default,
-# but poppler uses C++11 features that require at least 10.9
+# macOS still doesn't do C++11 or later by default
 if platform.system() == "Darwin":
-    extra_compile_args += ["-mmacosx-version-min=10.9", "-std=c++11"]
-    extra_link_args += ["-mmacosx-version-min=10.9"]
+    extra_compile_args += ["-std=c++11"]
     brew_include, brew_library = brew_poppler_include()
     if brew_include is not None:
         include_dirs.append(brew_include)
@@ -73,7 +70,6 @@ module = Extension(
     library_dirs=library_dirs,
     define_macros=macros,
     extra_compile_args=extra_compile_args,
-    extra_link_args=extra_link_args,
 )
 
 with open("README.md") as f:
