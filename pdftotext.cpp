@@ -251,26 +251,26 @@ static PyModuleDef pdftotextmodule = {
 };
 
 PyMODINIT_FUNC PyInit_pdftotext() {
-    PyObject* module;
+    PyObject* mod;
 
     PDFType.tp_new = PyType_GenericNew;
     if (PyType_Ready(&PDFType) < 0) {
         return NULL;
     }
 
-    module = PyModule_Create(&pdftotextmodule);
-    if (module == NULL) {
+    mod = PyModule_Create(&pdftotextmodule);
+    if (mod == NULL) {
         return NULL;
     }
 
     Py_INCREF(&PDFType);
-    PyModule_AddObject(module, "PDF", (PyObject*)&PDFType);
+    PyModule_AddObject(mod, "PDF", (PyObject*)&PDFType);
 
     PdftotextError = PyErr_NewExceptionWithDoc("pdftotext.Error", "PDF error.", NULL, NULL);
     Py_INCREF(PdftotextError);
-    PyModule_AddObject(module, "Error", PdftotextError);
+    PyModule_AddObject(mod, "Error", PdftotextError);
 
     poppler::set_debug_error_function(do_nothing, NULL);
 
-    return module;
+    return mod;
 }
