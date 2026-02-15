@@ -41,19 +41,19 @@ older OS.
 ### Debian, Ubuntu, and friends
 
 ```
-sudo apt install build-essential libpoppler-cpp-dev pkg-config python3-dev
+sudo apt install build-essential libpoppler-cpp-dev python3-dev
 ```
 
 ### Fedora, Red Hat, and friends
 
 ```
-sudo yum install gcc-c++ pkgconfig poppler-cpp-devel python3-devel
+sudo yum install gcc-c++ poppler-cpp-devel python3-devel
 ```
 
 ### macOS
 
 ```
-brew install pkg-config poppler python
+brew install poppler python
 ```
 
 

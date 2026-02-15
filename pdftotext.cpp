@@ -3,6 +3,7 @@
 #include <poppler/cpp/poppler-document.h>
 #include <poppler/cpp/poppler-global.h>
 #include <poppler/cpp/poppler-page.h>
+#include <poppler/cpp/poppler-version.h>
 
 #include <algorithm>
 #include <climits>
@@ -138,7 +139,7 @@ static PyObject* PDF_read_page(PDF* self, int page_number) {
         return PyErr_Format(PdftotextError, "poppler error creating page");
     }
 
-#if POPPLER_CPP_AT_LEAST_0_88_0
+#if POPPLER_VERSION_MAJOR > 0 || POPPLER_VERSION_MINOR >= 88
     layout_mode = poppler::page::non_raw_non_physical_layout;
 #else
     layout_mode = poppler::page::physical_layout;
@@ -150,7 +151,7 @@ static PyObject* PDF_read_page(PDF* self, int page_number) {
         layout_mode = poppler::page::physical_layout;
     }
 
-#if POPPLER_CPP_AT_LEAST_0_58_0
+#if POPPLER_VERSION_MAJOR > 0 || POPPLER_VERSION_MINOR >= 58
     page_utf8 = page->text(poppler::rectf(0, 0, 0, 0), layout_mode).to_utf8();
 #else
     // Workaround for poppler bug #94517, fixed in poppler 0.58.0, released 2017-09-01

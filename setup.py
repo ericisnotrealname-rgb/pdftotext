@@ -5,19 +5,6 @@ from setuptools import Extension
 from setuptools import setup
 
 
-def poppler_cpp_at_least(version):
-    try:
-        subprocess.check_call(
-            ["pkg-config", "--exists", "poppler-cpp >= {}".format(version)]
-        )
-    except subprocess.CalledProcessError:
-        return False
-    except (FileNotFoundError, OSError):
-        print("WARNING: pkg-config not found--guessing at poppler version.")
-        print("         If the build fails, install pkg-config and try again.")
-    return True
-
-
 def brew_poppler_include():
     try:
         brew_list = subprocess.check_output(["brew", "list", "poppler"])
@@ -57,18 +44,12 @@ if platform.system() == "Darwin":
     if brew_library is not None:
         library_dirs.append(brew_library)
 
-macros = [
-    ("POPPLER_CPP_AT_LEAST_0_58_0", int(poppler_cpp_at_least("0.58.0"))),
-    ("POPPLER_CPP_AT_LEAST_0_88_0", int(poppler_cpp_at_least("0.88.0"))),
-]
-
 module = Extension(
     "pdftotext",
     sources=["pdftotext.cpp"],
     libraries=["poppler-cpp"],
     include_dirs=include_dirs,
     library_dirs=library_dirs,
-    define_macros=macros,
     extra_compile_args=extra_compile_args,
 )
 
