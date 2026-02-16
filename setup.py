@@ -5,7 +5,7 @@ from setuptools import Extension
 from setuptools import setup
 
 
-def brew_poppler_include():
+def brew_dirs():
     try:
         brew_list = subprocess.check_output(["brew", "list", "poppler"])
         try:
@@ -20,7 +20,7 @@ def brew_poppler_include():
                 include_dir = os.path.dirname(os.path.dirname(brew_file))
             elif brew_file.endswith(".dylib"):
                 library_dir = os.path.dirname(brew_file)
-        return include_dir, library_dir
+        return [include_dir], [library_dir]
     except (FileNotFoundError, OSError, subprocess.CalledProcessError):
         return None, None
 
@@ -28,21 +28,12 @@ def brew_poppler_include():
 include_dirs = None
 library_dirs = None
 
-# On some BSDs, poppler is in /usr/local, which is not searched by default
-if platform.system() in ["Darwin", "FreeBSD", "OpenBSD"]:
-    include_dirs = ["/usr/local/include"]
-    library_dirs = ["/usr/local/lib"]
-
 extra_compile_args = ["-Wall"]
 
 # macOS still doesn't do C++11 or later by default
 if platform.system() == "Darwin":
     extra_compile_args += ["-std=c++11"]
-    brew_include, brew_library = brew_poppler_include()
-    if brew_include is not None:
-        include_dirs.append(brew_include)
-    if brew_library is not None:
-        library_dirs.append(brew_library)
+    include_dirs, library_dirs = brew_dirs()
 
 module = Extension(
     "pdftotext",
