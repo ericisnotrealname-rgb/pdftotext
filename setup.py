@@ -1,53 +1,19 @@
-import os
-import platform
-import subprocess
-from setuptools import Extension
-from setuptools import setup
+import setuptools
 
-
-def brew_dirs():
-    try:
-        brew_list = subprocess.check_output(["brew", "list", "poppler"])
-        try:
-            brew_list = brew_list.decode()
-        except (AttributeError, UnicodeDecodeError):
-            pass
-        include_dir = None
-        library_dir = None
-        for brew_file_line in brew_list.split("\n"):
-            brew_file = brew_file_line.split("(")[0].strip()
-            if brew_file.endswith("include/poppler/OptionalContent.h"):
-                include_dir = os.path.dirname(os.path.dirname(brew_file))
-            elif brew_file.endswith(".dylib"):
-                library_dir = os.path.dirname(brew_file)
-        return [include_dir], [library_dir]
-    except (FileNotFoundError, OSError, subprocess.CalledProcessError):
-        return None, None
-
-
-include_dirs = None
-library_dirs = None
-
-extra_compile_args = ["-Wall"]
-
-# macOS still doesn't do C++11 or later by default
-if platform.system() == "Darwin":
-    extra_compile_args += ["-std=c++11"]
-    include_dirs, library_dirs = brew_dirs()
-
-module = Extension(
+# This includes extra paths for brew on macOS
+module = setuptools.Extension(
     "pdftotext",
     sources=["pdftotext.cpp"],
     libraries=["poppler-cpp"],
-    include_dirs=include_dirs,
-    library_dirs=library_dirs,
-    extra_compile_args=extra_compile_args,
+    include_dirs=["/opt/homebrew/include", "/usr/local/include"],
+    library_dirs=["/opt/homebrew/lib", "/usr/local/lib"],
+    extra_compile_args=["-std=c++11", "-Wall"],
 )
 
 with open("README.md") as f:
     long_description = f.read()
 
-setup(
+setuptools.setup(
     name="pdftotext",
     version="3.0.0",
     author="Jason Alan Palmer",
