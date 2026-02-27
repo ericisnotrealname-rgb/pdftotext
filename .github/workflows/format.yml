@@ -7,8 +7,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Install dependencies
-        run: sudo apt install --yes black clang-format
+        run: |
+          sudo apt install --yes clang-format
+          pip install ruff
       - name: Check python formatting
-        run: black --check .
+        run: ruff format --diff
       - name: Check C++ formatting
         run: clang-format --dry-run --Werror pdftotext.cpp

@@ -1,11 +1,8 @@
-"""Tests for the pdftotext module."""
-
 import importlib.resources
 import io
 import unittest
 
 import pdftotext
-
 
 test_files = {}
 directory = importlib.resources.files("tests")

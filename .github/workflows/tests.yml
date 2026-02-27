@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies (linux)
         if: runner.os == 'Linux'
         run: |
-          sudo apt install --fix-missing --yes libpoppler-cpp-dev
+          sudo apt install --yes libpoppler-cpp-dev
           pip install setuptools
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
