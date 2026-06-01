@@ -10,7 +10,7 @@ name = "Jason Alan Palmer"
 email = "jalanpalmer@gmail.com"
 
 [project.urls]
-homepage = "https://github.com/jalan/pdftotext"
+homepage = "https://git.sr.ht/~jalan/pdftotext"
 
 [build-system]
 requires = ["setuptools>=74.1.0"]
