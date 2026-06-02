@@ -23,14 +23,3 @@ libraries = ["poppler-cpp"]
 include-dirs = ["/opt/homebrew/include", "/usr/local/include"]
 library-dirs = ["/opt/homebrew/lib", "/usr/local/lib"]
 extra-compile-args = ["-std=c++11", "-Wall"]
-
-[tool.ruff]
-line-length = 120
-
-[tool.ruff.lint]
-select = [
-  "B",
-  "E",
-  "F",
-  "I",
-]
