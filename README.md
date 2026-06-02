@@ -1,6 +1,7 @@
 # pdftotext
 
 [![PyPI](https://img.shields.io/pypi/v/pdftotext.svg)](https://pypi.python.org/pypi/pdftotext)
+[![Status](https://builds.sr.ht/~jalan/pdftotext/commits/main.svg)](https://builds.sr.ht/~jalan/pdftotext/commits/main?)
 [![Downloads](https://pepy.tech/badge/pdftotext)](https://pepy.tech/project/pdftotext)
 
 Simple PDF text extraction
