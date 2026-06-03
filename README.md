@@ -33,10 +33,13 @@ print("\n\n".join(pdf))
 ```
 
 
-## OS Dependencies
+## Why
 
-These instructions assume you're on a recent OS. Package names may differ for an
-older OS.
+I needed to index a lot of PDF documents with Python. Existing solutions were
+slow, complicated, or both. That might not be true anymore!
+
+
+## Dependencies
 
 ### Debian, Ubuntu, and friends
 
