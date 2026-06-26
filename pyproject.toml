@@ -1,6 +1,6 @@
 [project]
 name = "pdftotext"
-version = "3.0.0"
+version = "4.0.0"
 description = "Simple PDF text extraction"
 license = "MIT"
 readme = "README.md"
@@ -10,7 +10,7 @@ name = "Jason Alan Palmer"
 email = "jalanpalmer@gmail.com"
 
 [project.urls]
-homepage = "https://git.sr.ht/~jalan/pdftotext"
+homepage = "https://sr.ht/~jalan/pdftotext/"
 
 [build-system]
 requires = ["setuptools>=74.1.0"]

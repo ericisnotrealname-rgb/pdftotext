@@ -1,5 +1,12 @@
 # Changes
 
+## 4.0.0 - 2026-06-26
+
+ - Move to pyproject.toml
+ - Remove extra build efforts that aren't supported by pyproject.toml
+ - Remove pkg-config build dependency
+
+
 ## 3.0.0 - 2024-12-06
 
  - Drop support for Python 2
