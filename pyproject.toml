@@ -2,7 +2,7 @@
 name = "pdftotext"
 version = "4.0.0"
 description = "Simple PDF text extraction"
-license = "MIT"
+license = { text = "MIT" }
 readme = "README.md"
 
 [[project.authors]]
